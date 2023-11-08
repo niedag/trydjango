@@ -5,8 +5,11 @@ from .forms import ProductCreateForm
 
 def product_create_view_raw(request):
     context = {}
-    print(request.POST)
-    print(request.GET)
+    #print(request.GET)
+    #print(request.POST)
+    if(request.method == 'POST'):
+        my_title = request.POST.get('title')
+        print(my_title)
     return render(request, "products/product_detail_raw.html", context)
 
 def product_create_view(request):
