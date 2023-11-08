@@ -25,6 +25,7 @@ from pages.views import hello_world_view
 # Products
 from products.views import product_detail_view
 from products.views import product_create_view
+from products.views import product_create_view_raw
 
 # Facebook testing
 from facetest.views import facehome_view
@@ -37,6 +38,8 @@ urlpatterns = [
     path('about/', about_view),
     path('products/', product_detail_view),
     path('create/', product_create_view),
+    path('create-raw/', product_create_view_raw),
+
 
 
     path('facetest/', facehome_view),

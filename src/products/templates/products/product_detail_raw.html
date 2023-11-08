@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Create Page </h1>
+
+Make a Google search:
+<form action = 'http://www.google.com/search' method = 'GET' >
+    <input type = 'text' name = 'q' placeholder = "Your search">
+    <input type = 'submit' value = 'Save' />
+</form>
+<br>
+<br>
+
+<form action = '.' method = 'POST' >{% csrf_token %}
+    <input type = 'text' name = 'title' placeholder = "Your title">
+    <input type = 'submit' value = 'Save' />
+</form>
+
+{% endblock %}

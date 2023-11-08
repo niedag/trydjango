@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>In App Template: {{ object.title }}</h1>
+<p> {% if object.description %}
+        {{ object.description }}
+    {%else%}
+        Description Coming Soon
+    {% endif %}
+</p>
+{{ object.price }}
+
+
+{% endblock %}

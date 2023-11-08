@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Base Template Title</title>
 </head>
 <body>
-$END$
+
+    <h1>This is a navbar</h1>
+    {% include 'navbar.html' %}
+
+    {% block content %}
+        replace me
+    {% endblock %}
+
+<!--    {% block another_block %}-->
+<!--        this will be replaced with inherited code that has the block name: another_block-->
+<!--    {% endblock another_block %}-->
 </body>
 </html>

@@ -3,6 +3,12 @@ from django.shortcuts import render
 from .models import Product
 from .forms import ProductCreateForm
 
+def product_create_view_raw(request):
+    context = {}
+    print(request.POST)
+    print(request.GET)
+    return render(request, "products/product_detail_raw.html", context)
+
 def product_create_view(request):
     form = ProductCreateForm(request.POST or None)
     if form.is_valid():
