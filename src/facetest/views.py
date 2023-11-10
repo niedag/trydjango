@@ -9,7 +9,7 @@ from django.conf import settings
 
 from .forms import FacebookPostForm
 
-# TODO: Auto update access_t_page with access_t (long-term)
+# TODO: Auto update access_t_page with access_t (long-term) ALSO work on parsing cURL responses for conversations, acess tokens, etc.
 
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 
