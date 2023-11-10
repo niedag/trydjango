@@ -29,8 +29,9 @@ from products.views import product_create_view_raw_html
 from products.views import product_create_view_raw_django
 
 # Facebook testing
-from facetest.views import facehome_view
+from facetest.views import facetest_view
 from facetest.views import display_my_facebook_post
+from facetest.views import facepost_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,6 +44,7 @@ urlpatterns = [
     path('create-raw-django/', product_create_view_raw_django),
 
 
-    path('facetest/', facehome_view),
+    path('facetest/', facetest_view),
     path('my-facebook-post/', display_my_facebook_post),
+    path('facepost/', facepost_view),
 ]

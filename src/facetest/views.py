@@ -7,28 +7,47 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
 
+from .forms import FacebookPostForm
+
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 post_id = "2553705538124434_2552109628284025"
 
+def post_to_Facebook(message):
+    graph = facebook.GraphAPI(access_token = access_t, )
 
-def facehome_view(request, *args, **kwargs):
+def facepost_view(request):
+    if request.method == 'POST':
+        postform = FacebookPostForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            post_to_facebook(text)
+            print("Successfully posted")
+    else:
+        postform = FacebookPostForm()
+
+    context = {
+        "postform": postform,
+    }
+    return render(request, 'facetest/facebook-post.html', context)
+
+
+
+
+# Two ways of getting a single post (requires the post ID)
+
+def facetest_view(request, *args, **kwargs):
     graph = facebook.GraphAPI(access_token=access_t, version='3.1')
     post = graph.get_object(id=post_id, fields="message")
-    # print(post['message'])
-    all_posts_ids = ['2553705538124434_2552109628284025',
-                     '2553705538124434_2555396167955371',
-                     '2553705538124434_2555404161287905']
-    field_list = 'id, message, created_time'
-    all_posts = graph.get_objects(ids=all_posts_ids, fields="message")
+    print(post['message'])
 
     my_context = {
+        "post": post,
         "my_text": "This is an example context variable",
         "my_post": post['message'],
-        "all_posts": all_posts['message'],
     }
     # graph.put_object("me", "feed", message = "Hello World")
 
-    return render(request, "facetest3.html", my_context)
+    return render(request, "facetest/facetest.html", my_context)
 
 def display_my_facebook_post(request, *args, **kwargs): # Using chatGTP - USES python-facebook-api and cURL (request/transfer data over URL)
     # https://pypi.org/project/python-facebook-api

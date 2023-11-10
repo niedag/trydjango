@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Post to Facebook</title>
+</head>
+
+<body>
+    <h2>Post to Facebook</h2>
+    <form method="POST" action="."> {% csrf_token %}
+        {{ postform.as_p }}
+        <button type="submit">Post</button>
+    </form>
+</body>
+</html>
