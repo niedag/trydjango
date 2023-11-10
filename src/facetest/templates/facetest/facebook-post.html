@@ -5,9 +5,13 @@
 
 <body>
     <h2>Post to Facebook</h2>
-    <form method="POST" action="."> {% csrf_token %}
+    <form method="POST" action="." name = 'dont_spam'> {% csrf_token %}
         {{ postform.as_p }}
         <button type="submit">Post</button>
+    </form>
+    <br> <br>
+    <form method = "POST"> {% csrf_token %}
+        <button type = "submit" name = 'run_script'> Spam post </button>
     </form>
 </body>
 </html>

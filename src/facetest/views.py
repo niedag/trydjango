@@ -9,10 +9,12 @@ from django.conf import settings
 
 from .forms import FacebookPostForm
 
+# TODO: Auto update access_t_page with access_t (long-term)
+
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 
 # Access token for Page posts: me/accounts --> access token
-access_t_page = 'EAAVacs9AvhEBO9jjVbsiR86SrXlccuL3xv7FcpjjrLZB3ne77xZCP2Kgdi6uUVvTC0f1z1UFbUO0aqDrj7X9YCcySSd4DPCk2NUnqvqSnZBcyZBirw2nyPcG6ZANuInlHI9RO6PvslZAa6Q48pZCCnjJmaXTZAlixvDz6A0EX3bDljNIF4k4ZCHgmbx09m6yR3AF8lzKM6fVMY93HrZCZAZCKARKqmoZD'
+access_t_page = 'EAAVacs9AvhEBO16KR2ZCzg1k1ZB7hoAsAxZBhtVwFRCHMiCnHo17kG0keomsLkVQVRudKVZAYbfwD9wbq08jLPbAMNLx9q8ZA8j9Y8QaMruzZCMjZC7o4JLXvmgbWFBgANzbkQDpZA7PmLuLkcKQ6SJNDjJ4YZA22DvmZBQa7cdL1V77MBvEtw3HGnE5Nv1y43EaNSL7PuaxJREbekFr4VulXxuCml'
 
 post_id = "2553705538124434_2552109628284025" # page#_post#
 page_id = "155168831017376"
@@ -23,14 +25,13 @@ def facepost_view(request):
         postform = FacebookPostForm(request.POST)
         if postform.is_valid():
             text = postform.cleaned_data['text']
-
             payload = {
                 'message': text,
                 'access_token': access_t_page
             }
 
             response = requests.post(post_url, data = payload)
-            if response.status_code == 200:
+            if response.status_code == 200: # Successful response retrieval status code
                 print("success!")
                 postform = FacebookPostForm()
             else:
@@ -43,6 +44,16 @@ def facepost_view(request):
     }
     return render(request, 'facetest/facebook-post.html', context)
 
+def spam_post_test(custom_message, spamNum):
+    for i in range(spamNum):
+        text = 'spam message ' + str(i+1) + " " + custom_message
+        payload = {
+            'message': text,
+            'access_token': access_t_page,
+        }
+        requests.post(post_url, data = payload)
+        print("success")
+    print('script complete')
 
 
 # Two ways of getting a single post (requires the post ID)
