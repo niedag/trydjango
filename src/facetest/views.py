@@ -10,26 +10,38 @@ from django.conf import settings
 from .forms import FacebookPostForm
 
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
-post_id = "2553705538124434_2552109628284025"
 
-def post_to_Facebook(message):
-    graph = facebook.GraphAPI(access_token = access_t, )
+# Access token for Page posts: me/accounts --> access token
+access_t_page = 'EAAVacs9AvhEBO9jjVbsiR86SrXlccuL3xv7FcpjjrLZB3ne77xZCP2Kgdi6uUVvTC0f1z1UFbUO0aqDrj7X9YCcySSd4DPCk2NUnqvqSnZBcyZBirw2nyPcG6ZANuInlHI9RO6PvslZAa6Q48pZCCnjJmaXTZAlixvDz6A0EX3bDljNIF4k4ZCHgmbx09m6yR3AF8lzKM6fVMY93HrZCZAZCKARKqmoZD'
+
+post_id = "2553705538124434_2552109628284025" # page#_post#
+page_id = "155168831017376"
+post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
 
 def facepost_view(request):
     if request.method == 'POST':
         postform = FacebookPostForm(request.POST)
-        if form.is_valid():
-            text = form.cleaned_data['text']
-            post_to_facebook(text)
-            print("Successfully posted")
+        if postform.is_valid():
+            text = postform.cleaned_data['text']
+
+            payload = {
+                'message': text,
+                'access_token': access_t_page
+            }
+
+            response = requests.post(post_url, data = payload)
+            if response.status_code == 200:
+                print("success!")
+                postform = FacebookPostForm()
+            else:
+                print(response.text)
+                print("An error has occured")
     else:
         postform = FacebookPostForm()
-
     context = {
         "postform": postform,
     }
     return render(request, 'facetest/facebook-post.html', context)
-
 
 
 
