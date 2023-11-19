@@ -7,4 +7,13 @@ class FacebookPostForm(forms.Form):
                            widget = forms.Textarea(
                            attrs = {
                                "placeholder": "Your post",
-                           }))
+                           }
+                        ))
+
+class FacebookMessageForm(forms.Form):
+    text = forms.CharField(label = '', required = True,
+                           widget = forms.Textarea(
+                               attrs = {
+                                   "placeholder": "Type your message here!",
+                               }
+                           ))

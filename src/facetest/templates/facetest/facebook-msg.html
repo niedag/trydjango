@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send a Message!</title>
+</head>
+<body>
+    <h2>Send a Message to Grant!</h2> - Requires, 24h message time window, initiation, id of person, long-term page access token!
+    <form method = "POST" action = "." name = "message_grant"> {% csrf_token %}
+        {{ msgform.as_p }}
+        <button type = "submit">Send!</button>
+    </form>
+</body>
+</html>

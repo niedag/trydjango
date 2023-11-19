@@ -8,19 +8,53 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from .forms import FacebookPostForm
+from .forms import FacebookMessageForm
 
 # TODO: Auto update access_t_page with access_t (long-term) ALSO work on parsing cURL responses for conversations, acess tokens, etc.
 
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 
 # Access token for Page posts: me/accounts --> access token
-access_t_page = 'EAAVacs9AvhEBO16KR2ZCzg1k1ZB7hoAsAxZBhtVwFRCHMiCnHo17kG0keomsLkVQVRudKVZAYbfwD9wbq08jLPbAMNLx9q8ZA8j9Y8QaMruzZCMjZC7o4JLXvmgbWFBgANzbkQDpZA7PmLuLkcKQ6SJNDjJ4YZA22DvmZBQa7cdL1V77MBvEtw3HGnE5Nv1y43EaNSL7PuaxJREbekFr4VulXxuCml'
+access_t_page = 'EAAVacs9AvhEBO7f6S28SvgTd9dgY3wymtcbOQTtk1EGXcbZAgjsm9rANjUv11akXcfYpKVggaPXtZBbapoXdbIV5rBzLjO0KerC2aZCM0NKcAOIMXVtP3UTS4PlQUZA5ed6ntazf7JOTbYYSsmFGgXpePctnenznoZA7Tl5i1VqZCDEiipRPnmZCtzVmYoiO7nLnzjUwHhZCN8yEqt1Sdb6ArdHZC'
 
 post_id = "2553705538124434_2552109628284025" # page#_post#
 page_id = "155168831017376"
 post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
 
-def facepost_view(request):
+
+def facemsg_view(request):
+    recipient_id = "7254791501239920"
+    britain_id = "6737231126395335"
+    mav_id = "7523352661026801"
+    url = "https://graph.facebook.com/v18.0/155168831017376/messages"
+    message_id = "t_2565001643661490-oSnFgY4Gw"
+    if request.method == 'POST':
+        msgform = FacebookMessageForm(request.POST)
+        if msgform.is_valid():
+            msg = msgform.cleaned_data['text']
+            data = {
+                'recipient': {'id': recipient_id },
+                'messaging_type': 'RESPONSE',
+                'message': {'text': msg},
+                'access_token': access_t_page,
+            }
+            response = requests.post(url, json = data)
+            if response.status_code == 200: # Successful response retrieval status code
+                print("success!")
+                msgform = FacebookMessageForm()
+            else:
+                print(response.text)
+                print("An error has occured")
+
+    else:
+        msgform = FacebookMessageForm()
+
+    context = {
+        "msgform": msgform,
+    }
+    return render(request, 'facetest/facebook-msg.html', context)
+
+def facetest_view(request): #only handles post requests with facepost name
     if request.method == 'POST':
         postform = FacebookPostForm(request.POST)
         if postform.is_valid():
@@ -39,12 +73,14 @@ def facepost_view(request):
                 print("An error has occured")
     else:
         postform = FacebookPostForm()
+        print(request.POST)
+
     context = {
         "postform": postform,
     }
     return render(request, 'facetest/facebook-post.html', context)
 
-def spam_post_test(custom_message, spamNum):
+def spam_post_test(requests,custom_message, spamNum):
     for i in range(spamNum):
         text = 'spam message ' + str(i+1) + " " + custom_message
         payload = {
@@ -58,7 +94,7 @@ def spam_post_test(custom_message, spamNum):
 
 # Two ways of getting a single post (requires the post ID)
 
-def facetest_view(request, *args, **kwargs):
+def facepost_view(request, *args, **kwargs):
     graph = facebook.GraphAPI(access_token=access_t, version='3.1')
     post = graph.get_object(id=post_id, fields="message")
     print(post['message'])
