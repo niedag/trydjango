@@ -15,7 +15,7 @@ from .forms import FacebookMessageForm
 access_t = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 
 # Access token for Page posts: me/accounts --> access token
-access_t_page = 'EAAVacs9AvhEBO7f6S28SvgTd9dgY3wymtcbOQTtk1EGXcbZAgjsm9rANjUv11akXcfYpKVggaPXtZBbapoXdbIV5rBzLjO0KerC2aZCM0NKcAOIMXVtP3UTS4PlQUZA5ed6ntazf7JOTbYYSsmFGgXpePctnenznoZA7Tl5i1VqZCDEiipRPnmZCtzVmYoiO7nLnzjUwHhZCN8yEqt1Sdb6ArdHZC'
+access_t_page = 'EAAVacs9AvhEBOzWMfQCDAN9MhviMWZAY8BuHwi6X4rs8zi7JShAcrANZBUAZBpJPSoyIZCbyIcoi1FQQ0MSb1LeFFUonO7JazJhNc37vqDgfugh1QEQZAoqVhpVZCSZBJPmvw8U5ZAiqqPsORL5NpfRPkd8SK4NhJi0zgMS9ModfFZCI7EdZCGz1SWCWAowzVcvZBPeC8FME2CpOLijLBZCAJwva1IM7'
 
 post_id = "2553705538124434_2552109628284025" # page#_post#
 page_id = "155168831017376"
@@ -32,20 +32,21 @@ def facemsg_view(request):
         msgform = FacebookMessageForm(request.POST)
         if msgform.is_valid():
             msg = msgform.cleaned_data['text']
-            data = {
-                'recipient': {'id': recipient_id },
-                'messaging_type': 'RESPONSE',
-                'message': {'text': msg},
-                'access_token': access_t_page,
-            }
-            response = requests.post(url, json = data)
-            if response.status_code == 200: # Successful response retrieval status code
-                print("success!")
-                msgform = FacebookMessageForm()
-            else:
-                print(response.text)
-                print("An error has occured")
+            for i in range(10):
+                data = {
+                    'recipient': {'id': recipient_id },
+                    'messaging_type': 'RESPONSE',
+                    'message': {'text': msg + str(i)},
+                    'access_token': access_t_page,
+                }
 
+                response = requests.post(url, json = data)
+                if response.status_code == 200: # Successful response retrieval status code
+                    print("success!")
+                    msgform = FacebookMessageForm()
+                else:
+                    print(response.text)
+                    print("An error has occured")
     else:
         msgform = FacebookMessageForm()
 
