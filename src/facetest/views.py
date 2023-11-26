@@ -2,7 +2,6 @@ import requests
 import facebook # from facebook-sdk package
 
 
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
@@ -21,11 +20,9 @@ post_id = "2553705538124434_2552109628284025" # page#_post#
 page_id = "155168831017376"
 post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
 
-
 def facemsg_view(request):
     recipient_id = "7254791501239920"
-    britain_id = "6737231126395335"
-    mav_id = "7523352661026801"
+
     url = "https://graph.facebook.com/v18.0/155168831017376/messages"
     message_id = "t_2565001643661490-oSnFgY4Gw"
     if request.method == 'POST':
