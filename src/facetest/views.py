@@ -1,7 +1,7 @@
 import requests
 import facebook # from facebook-sdk package
 
-from pyfacebook import GraphAPI #What is this and how is it different from other packages?
+
 
 from django.shortcuts import render
 from django.http import HttpResponse
