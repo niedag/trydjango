@@ -92,7 +92,7 @@ def spam_post_test(requests,custom_message, spamNum):
 
 # Two ways of getting a single post (requires the post ID)
 
-def facepost_view(request, *args, **kwargs):
+def facepost_view(request, *args, **kwargs): # Using Facebook package (with GraphAPI functions)
     graph = facebook.GraphAPI(access_token=access_t, version='3.1')
     post = graph.get_object(id=post_id, fields="message")
     print(post['message'])
