@@ -5,6 +5,8 @@ app_id = '1506824033451537'
 app_secret = 'e0a58b1074b2237e90a152a1f4c156d0'
 long_term_user_access_token = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 page_name = 'Extra Secret Page'
+post_id = "2553705538124434_2552109628284025" # page#_post#
+
 
 def main():
     print('Hello, world!')
@@ -25,8 +27,16 @@ def main():
     page_graph_url = f'https://graph.facebook.com/v13.0/{page_id}/conversations?access_token={page_token}'
     response = requests.get(page_graph_url)
     data = response.json()
+    print(data['message'])
 
+    url = f'https://graph.facebook.com/v13.0/{post_id}?access_token={page_token}'
+    response = requests.get(url)
 
-    print('success')
+    if response.status_code == 200: #
+        post_data = response.json()
+
+    else:
+        print("Failed to retrieve the post")
+
 if __name__ == '__main__':
     main()

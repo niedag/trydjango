@@ -30,11 +30,14 @@ FACEBOOK_APP_SECRET = 'f18ffa5fd6ea0a2f2e5e8168b1b7f81d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # turn to FALSE when brought into a live server or live production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "beetle-frank-supposedly.ngrok-free.app",
+    "127.0.0.1"
+]
 
 
 # Application definition
-# Cornerstone of Django
+# Cornerstone of D`jango
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
