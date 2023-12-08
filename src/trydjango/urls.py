@@ -32,7 +32,7 @@ from products.views import product_create_view_raw_django
 from facetest.views import display_my_facebook_post
 from facetest.views import facetest_view
 from facetest.views import facemsg_view
-from facetest.views import json_display_view
+#from facetest.views import json_display_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -47,7 +47,7 @@ urlpatterns = [
     path('my-facebook-post/', display_my_facebook_post),
     path('facetest/', facetest_view),
     path('facemsg/', facemsg_view),
-    path('display_json/', json_display_view, name = 'json_display_page'),
+    #path('display_json/', json_display_view, name = 'json_display_page'),
 
 
 ]

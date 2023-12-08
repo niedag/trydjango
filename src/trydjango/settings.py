@@ -97,22 +97,22 @@ WSGI_APPLICATION = 'trydjango.wsgi.application'
 # Automatically has a sqlite3 database
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-connection_string = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
-parameters = {pair.split('=')[0]: pair.split('=')[1] for pair in connection_string.split(' ')}
+# connection_string = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
+# parameters = {pair.split('=')[0]: pair.split('=')[1] for pair in connection_string.split(' ')}
 
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-      'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': parameters['dbname'],
-        'USER': parameters['user'],
-        'PASSWORD': parameters['password'],
-        'HOST': parameters['host'],
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    #   'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': parameters['dbname'],
+    #     'USER': parameters['user'],
+    #     'PASSWORD': parameters['password'],
+    #     'HOST': parameters['host'],
+    # }
 
 }
 

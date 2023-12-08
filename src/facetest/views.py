@@ -27,6 +27,17 @@ post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
 
 
 def facemsg_view(request):
+    user_graph_url = f'https://graph.facebook.com/v13.0/me/accounts?access_token={long_term_user_access_token}'
+    response = requests.get(user_graph_url)
+    data = response.json()
+    page_token = None
+    page_id = None
+    for page in data['data']:  # Parses json response
+        if page['name'] == page_name:
+            page_id = page['id']  # Required in order to check conversations
+            page_token = page['access_token']  # Grab Page Access Token (it is temporary!)
+            break
+
     recipient_id = "7254791501239920"
     url = f"https://graph.facebook.com/v18.0/{page_id}/messages"
     #message_id = "t_2565001643661490-oSnFgY4Gw"
@@ -62,8 +73,8 @@ def facemsg_view(request):
     }
     return render(request, 'facetest/facebook-msg.html', context)
 
-def json_display_view(request, json_data):
-    return JsonResponse(json_data)
+# def json_display_view(request, json_data):
+#     return JsonResponse(json_data)
 
 def facetest_view(request): #only handles post requests with facepost name
     if request.method == 'POST':
