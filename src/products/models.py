@@ -12,4 +12,4 @@ class Product(models.Model): #We use model fields in order to map to the databas
     # if null True/False, means whether it can be empty/null in the database
 
     def get_absolute_url(self):
-        return reverse("product-detail", kwargs = {"my_id": self.id})
+        return reverse("products:product-detail", kwargs = {"id": self.id})

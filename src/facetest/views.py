@@ -18,7 +18,7 @@ app_secret = 'e0a58b1074b2237e90a152a1f4c156d0'
 long_term_user_access_token = 'EAAVacs9AvhEBO8FfsYkE9KFjZByjBqv36u5dQPjPemywZAypkqDr7I1edIx0E6kbBFimICWv9TEWyYrHcvFBmiQtHXPQsY1wU6XufviVV7A9uGxRCIVV7bW8nn1tEY8VA39KachRLvpBET3W3MlAFcdd5SDcZAVEtd8s4qy2NewZBevO9HurufS1'
 page_name = 'Extra Secret Page'
 #page_token = 'EAAVacs9AvhEBOzPD0VmeXihXwpEv0Be2YdZBR7XAqAfdUBrZC69Lwn567QlxBZC5E45OyEOkYPsz3it2d9JBNK1nZAYise5Hfi6I8AgNGp2A6zB5ZBaDbg9e7yvy91IT7a1H5FtPJc5BJw1aUZBsnKgyWmvGMPkFZBFYW8wpw5a4R8ZBYOFCG0DDZCepQOpbfbedus579rfdsCJ0ZAOXxadLPuxDUZD'
-page_token = 'EAAVacs9AvhEBO4PZCHVCeN6srFaZB9D59WVzMYYZC8WzSvkyWcz3FnfF4ZCH6xIHZCNYjJqihd0X2LkTk07VniZB5DwC3oodRKP2ca9LY4FQraHLxB63xZB4ZCn9mb9JwFy3s6aSdBGxxaCTm4LUbQdtPu68haPMMNRoOTJuw1CV583K6UqMZAQRD1p76JTIyaaZBe63Vlgr4oOIYdURYWmDQmHLMZD'
+page_token = 'EAAVacs9AvhEBO5u2sfRZBZAoKJrnP4wCYT6jO90ZC7RguQmYRGWb6oOefxSNs7Y3aguIbKEksFLdRhMNzsTNqbXEZBLr72hTGVESN4ILL0ZCFsPDkC0VOIjrYhezvme9PQyC2KGrIFTAobp3qqf41achI6MIChXLfpNLpgqZARRwJRiDI4jC53ZB7jwbGqGR2i1qNWuV2SQSbOtbfPZAs3zAgAgZD'
 
 post_id = "2553705538124434_2552109628284025" # page#_post
 page_id = "155168831017376"
@@ -27,17 +27,16 @@ post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
 
 
 def facemsg_view(request):
-    user_graph_url = f'https://graph.facebook.com/v13.0/me/accounts?access_token={long_term_user_access_token}'
-    response = requests.get(user_graph_url)
-    data = response.json()
-    page_token = None
-    page_id = None
-    for page in data['data']:  # Parses json response
-        if page['name'] == page_name:
-            page_id = page['id']  # Required in order to check conversations
-            page_token = page['access_token']  # Grab Page Access Token (it is temporary!)
-            break
-
+    # user_graph_url = f'https://graph.facebook.com/v13.0/me/accounts?access_token={long_term_user_access_token}'
+    # response = requests.get(user_graph_url)
+    # data = response.json()
+    # page_token = None
+    # page_id = None
+    # for page in data['data']:  # Parses json response
+    #     if page['name'] == page_name:
+    #         page_id = page['id']  # Required in order to check conversations
+    #         page_token = page['access_token']  # Grab Page Access Token (it is temporary!)
+    #         break
     recipient_id = "7254791501239920"
     url = f"https://graph.facebook.com/v18.0/{page_id}/messages"
     #message_id = "t_2565001643661490-oSnFgY4Gw"

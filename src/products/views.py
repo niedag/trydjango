@@ -12,8 +12,8 @@ def product_list_view(request): #Dynamic linking Urls + Listing products ---- Ch
     }
     return render(request, "products/product_list.html", context)
 
-def product_delete_view(request, my_id):
-    obj = get_object_or_404(Product, id= my_id)
+def product_delete_view(request, id):
+    obj = get_object_or_404(Product, id= id)
     #obj.delete() -- using GET request to delete an entry-- NOT GOOD, USE POST REQUEST
 
     if request.method == "POST":
@@ -24,9 +24,9 @@ def product_delete_view(request, my_id):
     }
     return render(request, "products/product_delete.html", context)
 
-def product_detail_view(request, my_id): # I want to be able to grab different data from the database
+def product_detail_view(request, id): # I want to be able to grab different data from the database
     #obj = Product.objects.get(id=my_id)
-    obj = get_object_or_404(Product, id = my_id) # Handing DoesNotExist error most efficiently
+    obj = get_object_or_404(Product, id = id) # Handing DoesNotExist error most efficiently
     # try:
     #     obj = Product.objects.get(id=my_id)
     # except Product.DoesNotExist:
@@ -36,9 +36,12 @@ def product_detail_view(request, my_id): # I want to be able to grab different d
     }
     return render(request, "products/product_detail.html", context)
 
-def product_update_view(request, my_id):
-    obj = get_object_or_404(Product, id = my_id)
-    form = ProductForm(request.POST)
+def product_update_view(request, id = id):
+    obj = get_object_or_404(Product, id = id)
+    form = RawProductForm(request.POST)
+    context = {
+        'form': form
+    }
     return render (request, "products/product_create.html", context)
 
 def product_create_view(request):

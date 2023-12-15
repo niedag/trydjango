@@ -16,24 +16,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
 from pages.views import homepage_view
 from pages.views import about_view
 from pages.views import hello_world_view
-
-
-# Products
-from products.views import (
-    product_create_view,
-    product_create_view_raw_html,
-    product_create_view_raw_django,
-    render_initial_data,
-
-    product_detail_view,
-    product_list_view,
-    product_delete_view,
-)
-
 
 # Facebook testing
 from facetest.views import display_my_facebook_post
@@ -42,22 +29,13 @@ from facetest.views import facemsg_view
 #from facetest.views import json_display_view
 
 urlpatterns = [
+    path('products/', include('products.urls')),
+    path('facetest/', include('facetest.urls')),
+
     path('admin/', admin.site.urls),
     path('', homepage_view, name ='home'),
     path('hello-world/', hello_world_view),
     path('about/', about_view),
-    path('create/', product_create_view),
-    path('create-raw-html/', product_create_view_raw_html),
-    path('create-raw-django/', product_create_view_raw_django),
-    path('initial/', render_initial_data),
-
-    path('product/', product_list_view, name='product-list'),
-    path('product/<int:my_id>/', product_detail_view, name = 'product-detail'),
-    path('product/<int:my_id>/delete/', product_delete_view, name = 'product-delete'),
-
-    path('my-facebook-post/', display_my_facebook_post),
-    path('facetest/', facetest_view),
-    path('facemsg/', facemsg_view),
     #path('display_json/', json_display_view, name = 'json_display_page'),
 
 
