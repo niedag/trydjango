@@ -22,9 +22,9 @@ def product_delete_view(request, my_id):
     context = {
         "object": obj
     }
-    return render(request, "products/product_detail.html", context)
+    return render(request, "products/product_delete.html", context)
 
-def dynamic_lookup_view(request, my_id): # I want to be able to grab different data from the database
+def product_detail_view(request, my_id): # I want to be able to grab different data from the database
     #obj = Product.objects.get(id=my_id)
     obj = get_object_or_404(Product, id = my_id) # Handing DoesNotExist error most efficiently
     # try:
@@ -36,13 +36,16 @@ def dynamic_lookup_view(request, my_id): # I want to be able to grab different d
     }
     return render(request, "products/product_detail.html", context)
 
+def product_update_view(request, my_id):
+    obj = get_object_or_404(Product, id = my_id)
+    form = ProductForm(request.POST)
+    return render (request, "products/product_create.html", context)
 
 def product_create_view(request):
     form = ProductCreateForm(request.POST or None)
     if form.is_valid():
         form.save()
         form = ProductCreateForm()
-
     context = {
         'form':form
     }
@@ -94,15 +97,5 @@ def product_create_view_raw_html(request):
 #         'form':form
 #     }
 #     return render(request, "products/product_create.html", context)
-
-def product_detail_view(request):
-    obj = Product.objects.get(id=2)
-    # context = {
-    #     'title': obj.title,
-    #     'description': obj.description,
-    # }
-    context = {
-        "object": obj
-    }
 
     return render(request, "products/product_detail.html", context)

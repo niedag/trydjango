@@ -24,12 +24,12 @@ from pages.views import hello_world_view
 
 # Products
 from products.views import (
-    product_detail_view,
     product_create_view,
     product_create_view_raw_html,
     product_create_view_raw_django,
     render_initial_data,
-    dynamic_lookup_view,
+
+    product_detail_view,
     product_list_view,
     product_delete_view,
 )
@@ -46,14 +46,14 @@ urlpatterns = [
     path('', homepage_view, name ='home'),
     path('hello-world/', hello_world_view),
     path('about/', about_view),
-    path('products/', product_detail_view),
     path('create/', product_create_view),
     path('create-raw-html/', product_create_view_raw_html),
     path('create-raw-django/', product_create_view_raw_django),
     path('initial/', render_initial_data),
-    path('prod/<int:my_id>/', dynamic_lookup_view, name = 'product-detail'),
-    path('prod/', product_list_view, name = 'product-list'),
-    path('prod/<int:my_id>/delete/', product_delete_view, name = 'product-delete'),
+
+    path('product/', product_list_view, name='product-list'),
+    path('product/<int:my_id>/', product_detail_view, name = 'product-detail'),
+    path('product/<int:my_id>/delete/', product_delete_view, name = 'product-delete'),
 
     path('my-facebook-post/', display_my_facebook_post),
     path('facetest/', facetest_view),
