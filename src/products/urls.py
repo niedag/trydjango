@@ -18,7 +18,7 @@ urlpatterns = [
     path('create-raw-django/', product_create_view_raw_django),
     path('initial/', render_initial_data),
 
-    path('/', product_list_view, name='product-list'),
+    path('', product_list_view, name='product-list'),
     path('create/', product_create_view, name = 'product-list'),
     path('<int:id>/', product_detail_view, name='product-detail'),
     path('<int:id>/update', product_update_view, name = 'product-update'),
