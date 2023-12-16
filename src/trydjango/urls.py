@@ -22,15 +22,14 @@ from pages.views import homepage_view
 from pages.views import about_view
 from pages.views import hello_world_view
 
-# Facebook testing
-from facetest.views import display_my_facebook_post
-from facetest.views import facetest_view
-from facetest.views import facemsg_view
 #from facetest.views import json_display_view
 
 urlpatterns = [
-    path('products/', include('products.urls')),
-    path('facetest/', include('facetest.urls')),
+    path('products/', include('products.urls')), # Django basics
+    path('facetest/', include('facetest.urls')), # Facebook integration
+    path('blog/', include('Blog.urls')), # Django Basics: Class based views
+    path('accounts/', include('accounts.urls')),
+
 
     path('admin/', admin.site.urls),
     path('', homepage_view, name ='home'),

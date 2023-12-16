@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'products',
     'pages',
     'facetest',
+    'Blog',
+    'accounts',
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps section!
 ]

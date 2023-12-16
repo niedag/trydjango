@@ -4,8 +4,9 @@ from .models import Product
 
 class ProductCreateForm(forms.ModelForm): # Model form
     title = forms.CharField(label='',
-                    widget=forms.TextInput(attrs={"placeholder": "Your title" ,})),
-    email = forms.EmailField()
+                    widget=forms.TextInput(
+                        attrs={"placeholder": "Your title" ,})),
+    email = forms.EmailField(required = False)
     description = forms.CharField(
                     required=False,
                     widget=forms.Textarea(
@@ -24,6 +25,7 @@ class ProductCreateForm(forms.ModelForm): # Model form
             'title',
             'description',
             'price',
+            'email',
         ]
 
         # Form
