@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic.base import TemplateView # Create a view with just HTML
 
 from pages.views import homepage_view
 from pages.views import about_view
@@ -32,7 +33,8 @@ urlpatterns = [
     path('accounts/', include("django.contrib.auth.urls")),
 
     path('admin/', admin.site.urls),
-    path('', homepage_view, name ='home'),
+    path('', TemplateView.as_view(template_name = "home.html"), name ='home'),
+
     path('hello-world/', hello_world_view),
     path('about/', about_view),
     #path('display_json/', json_display_view, name = 'json_display_page'),
