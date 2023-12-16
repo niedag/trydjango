@@ -80,7 +80,7 @@ ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
 TEMPLATES = [ # the html page that gets rendered in Django
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],                                                     # Needs to be OS independent
+        'DIRS': [os.path.join(BASE_DIR, "templates")],     # Needs to be OS independent
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,5 +160,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Azure Cloud Setup - unsure about whitenoise still
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Redirect after Login!!
+LOGIN_REDIRECT_URL = "/"

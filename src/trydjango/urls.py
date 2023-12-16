@@ -28,8 +28,8 @@ urlpatterns = [
     path('products/', include('products.urls')), # Django basics
     path('facetest/', include('facetest.urls')), # Facebook integration
     path('blog/', include('Blog.urls')), # Django Basics: Class based views
-    path('accounts/', include('accounts.urls')),
-
+    path('accounts/', include('accounts.urls')), # User auth
+    path('accounts/', include("django.contrib.auth.urls")),
 
     path('admin/', admin.site.urls),
     path('', homepage_view, name ='home'),
