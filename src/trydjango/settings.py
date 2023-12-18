@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'facetest',
     'Blog',
     'accounts',
+    'fb_auth',
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps section!
 ]
@@ -73,6 +74,7 @@ MIDDLEWARE = [
     #'facebook.middleware.SignedRequestMiddleware',
     #'facebook.middleware.AppRequestMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "social_django.middleware.SocialAuthExceptionMiddleware",
 ]
 
 ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
@@ -88,6 +90,8 @@ TEMPLATES = [ # the html page that gets rendered in Django
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.social_processors.backends',
             ],
         },
     },
@@ -164,6 +168,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-# Redirect after Login!!
+# Redirects for Login/Logout!!
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "home"
+LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "home"
+
+# SMTP Server for sending password reset emails
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
+# Additional backend settings for auth -- OAuth2 so django rest?
+AUTHENICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = ""
+SOCIAL_AUTH_FACEBOOK_SECRET = ""
+
+SOCIAL_AUTH_FACEBOOK_SCOPE =  [
+    'email',
+]
