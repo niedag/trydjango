@@ -1,5 +1,6 @@
 Learning the Django Web Framework (4.2.6)
-- Facebook Pages API
+- Facebook Pages API integration
+- Facebook login authentication
 - Requests and remote data retrieval
 - (Dynamic) URL routing, local SQlite3 database storage and retrieval
 - HTML, JavaScript 
