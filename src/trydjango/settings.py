@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'facetest',
     'Blog',
     'accounts',
+
+    'social_django',
     'fb_auth',
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps section!
@@ -91,7 +93,7 @@ TEMPLATES = [ # the html page that gets rendered in Django
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'social_django.social_processors.backends',
+                #'social_django.social_processors.backends',
             ],
         },
     },
@@ -169,9 +171,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Redirects for Login/Logout!!
-LOGIN_URL = 'login'
+#LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = "home"
-LOGOUT_URL = 'logout'
+#LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "home"
 
 # SMTP Server for sending password reset emails
