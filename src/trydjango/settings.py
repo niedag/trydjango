@@ -177,7 +177,7 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 # SMTP Server for sending password reset emails
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"  # Only good for local development - need to configure a
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 # Additional backend settings for auth -- OAuth2 so django rest?
