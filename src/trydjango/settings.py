@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
 
 
 # Application definition
-# Cornerstone of D`jango
+# Cornerstone of Django
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
     'social_django',
     'fb_auth',
+    'vue_app.apps.VueAppConfig', #
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps section!
 ]

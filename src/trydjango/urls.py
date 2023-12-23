@@ -23,7 +23,7 @@ from pages.views import homepage_view
 from pages.views import about_view
 from pages.views import hello_world_view
 
-#from facetest.views import json_display_view
+from vue_app.views import views as vue_views
 
 urlpatterns = [
     path('products/', include('products.urls')), # Django basics
