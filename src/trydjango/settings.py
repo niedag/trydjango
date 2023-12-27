@@ -32,7 +32,9 @@ DEBUG = True # turn to FALSE when brought into a live server or live production
 
 ALLOWED_HOSTS = [
     "beetle-frank-supposedly.ngrok-free.app",
-    "127.0.0.1"
+    "127.0.0.1",
+    "http://localhost:8000/"
+    'localhost'
 ]
 
 
@@ -54,10 +56,9 @@ INSTALLED_APPS = [
     'pages',
     'facetest',
     'Blog',
-    'accounts',
+    'accounts', # Handles authentication (fb, insta) and django auth
 
-    'social_django',
-    'fb_auth',
+    'social_django', # Req migrate?
     'vue_app.apps.VueAppConfig', #
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps section!
@@ -76,8 +77,9 @@ MIDDLEWARE = [
 
     #'facebook.middleware.SignedRequestMiddleware',
     #'facebook.middleware.AppRequestMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "social_django.middleware.SocialAuthExceptionMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+    #'django.contrib.auth.backends.ModelBackend'
 ]
 
 ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
@@ -172,9 +174,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Redirects for Login/Logout!!
-#LOGIN_URL = 'login'
+LOGIN_URL = 'accounts/login'
 LOGIN_REDIRECT_URL = "home"
-#LOGOUT_URL = 'logout'
+LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "home"
 
 # SMTP Server for sending password reset emails
@@ -184,11 +186,12 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # Additional backend settings for auth -- OAuth2 so django rest?
 AUTHENICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = ""
-SOCIAL_AUTH_FACEBOOK_SECRET = ""
+SOCIAL_AUTH_FACEBOOK_KEY = "1506824033451537"
+SOCIAL_AUTH_FACEBOOK_SECRET = "e0a58b1074b2237e90a152a1f4c156d0"
 
 SOCIAL_AUTH_FACEBOOK_SCOPE =  [
     'email',

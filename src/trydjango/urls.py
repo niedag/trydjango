@@ -23,13 +23,13 @@ from pages.views import homepage_view
 from pages.views import about_view
 from pages.views import hello_world_view
 
-from vue_app.views import views as vue_views
+#from vue_app.views import views as vue_views
 
 urlpatterns = [
     path('products/', include('products.urls')), # Django basics
     path('facetest/', include('facetest.urls')), # Facebook integration
     path('blog/', include('Blog.urls')), # Django Basics: Class based views
-    path('accounts/', include('accounts.urls')), # User auth
+    path('accounts/', include('accounts.urls')), # for signup page view
     path('accounts/', include("django.contrib.auth.urls")),
 
     path('admin/', admin.site.urls),

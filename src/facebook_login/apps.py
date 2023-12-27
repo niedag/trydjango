@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FbAuthConfig(AppConfig):
+class FacebookLoginConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'fb_auth'
+    name = 'facebook_login'
