@@ -48,20 +48,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # END OF DEFAULT DJANGO APPS
-    # This is where your apps or products core to your website.
-    # Pieces of your Django project
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+    'facebook_login',
 
     # my apps!
     'products',
     'pages',
     'facetest',
     'Blog',
-    'accounts', # Handles authentication (fb, insta) and django auth
+    'accounts', # Handles Django account signup
 
-    'social_django', # Req migrate?
+
     'vue_app.apps.VueAppConfig', #
     # create an app using python manage.py startapp [name]
-    # then add it to this installed_apps section!
+    # then add it to this installed_apps sectiongit !
 ]
 
 MIDDLEWARE = [
@@ -79,7 +84,9 @@ MIDDLEWARE = [
     #'facebook.middleware.AppRequestMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    #'django.contrib.auth.backends.ModelBackend'
+
+    #Required middleware for Allauth package
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
@@ -197,4 +204,4 @@ SOCIAL_AUTH_FACEBOOK_SCOPE =  [
     'email',
 ]
 
-# Registering Vue App in the project
+SITE_ID = 2
