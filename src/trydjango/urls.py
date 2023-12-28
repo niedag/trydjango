@@ -30,6 +30,8 @@ urlpatterns = [
     path('facetest/', include('facetest.urls')), # Facebook integration
     path('blog/', include('Blog.urls')), # Django Basics: Class based views
     path('accounts/', include('accounts.urls')), # for signup page view
+    path('facebook-login/', include('facebook_login.urls')),
+
     path('accounts/', include("django.contrib.auth.urls")),
 
     path('admin/', admin.site.urls),
@@ -39,5 +41,7 @@ urlpatterns = [
     path('about/', about_view),
     #path('display_json/', json_display_view, name = 'json_display_page'),
 
-
+    # All auth
+    path('accounts/', include('allauth.urls')), # Using include() doesn't interfere with the url function, adds additional information to the link?
+    path('', include('facebook_login.urls')),
 ]

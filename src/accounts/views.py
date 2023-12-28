@@ -7,5 +7,5 @@ from django.contrib.auth.decorators import login_required
 
 class SignUpView(generic.CreateView): # From Django library - visit
     form_class = UserCreationForm
-    success_url = reverse_lazy("templates:signup")
+    success_url = reverse_lazy("signup")
     template_name = "registration/signup.html"

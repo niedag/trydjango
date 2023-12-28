@@ -23,9 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--6w4pa7o!v8@dg)hp(4x!6y#4$ia)v-l%9=!m7$b9(s*(8d9*6'
 
-# FACEBOOK API CREDENCIALS
-FACEBOOK_APP_ID = '838106777784601'
-FACEBOOK_APP_SECRET = 'f18ffa5fd6ea0a2f2e5e8168b1b7f81d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # turn to FALSE when brought into a live server or live production
@@ -48,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # END OF DEFAULT DJANGO APPS
+
+    # Facebook authentication / All Auth required apps
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -55,7 +54,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     'facebook_login',
-
     # my apps!
     'products',
     'pages',
@@ -94,7 +92,7 @@ ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
 TEMPLATES = [ # the html page that gets rendered in Django
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],     # Needs to be OS independent
+        'DIRS': [os.path.join(BASE_DIR, "templates")],     # In order to be OS independent
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,7 +115,6 @@ WSGI_APPLICATION = 'trydjango.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 # connection_string = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING']
 # parameters = {pair.split('=')[0]: pair.split('=')[1] for pair in connection_string.split(' ')}
-
 
 DATABASES = {
     'default': {
@@ -185,6 +182,12 @@ LOGIN_URL = 'accounts/login'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+
+# All Auth
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+SITE_ID = 2
 
 # SMTP Server for sending password reset emails
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # Only good for local development - need to configure a
@@ -200,8 +203,6 @@ AUTHENICATION_BACKENDS = [
 SOCIAL_AUTH_FACEBOOK_KEY = "1506824033451537"
 SOCIAL_AUTH_FACEBOOK_SECRET = "e0a58b1074b2237e90a152a1f4c156d0"
 
-SOCIAL_AUTH_FACEBOOK_SCOPE =  [
-    'email',
-]
-
-SITE_ID = 2
+# All auth
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
