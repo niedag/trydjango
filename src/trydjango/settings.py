@@ -15,7 +15,6 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#C:\Users\ed\Dev\trydjango\src
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -25,7 +24,7 @@ SECRET_KEY = 'django-insecure--6w4pa7o!v8@dg)hp(4x!6y#4$ia)v-l%9=!m7$b9(s*(8d9*6
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # turn to FALSE when brought into a live server or live production
+DEBUG = True  # turn to FALSE when brought into a live server or live production
 
 ALLOWED_HOSTS = [
     "beetle-frank-supposedly.ngrok-free.app",
@@ -59,10 +58,10 @@ INSTALLED_APPS = [
     'pages',
     'facetest',
     'Blog',
-    'accounts', # Handles Django account signup
+    'accounts',  # Handles Django account signup
 
 
-    'vue_app.apps.VueAppConfig', #
+    'vue_app.apps.VueAppConfig',  #
     # create an app using python manage.py startapp [name]
     # then add it to this installed_apps sectiongit !
 ]
@@ -78,18 +77,16 @@ MIDDLEWARE = [
     # This is about request and how requests are handled, how security is handled
     # Lots of default security features
 
-    #'facebook.middleware.SignedRequestMiddleware',
-    #'facebook.middleware.AppRequestMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
 
-    #Required middleware for Allauth package
+    # Required middleware for Allauth package
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'trydjango.urls' #how to route any given URL
+ROOT_URLCONF = 'trydjango.urls'  # how to route any given URL
 
-TEMPLATES = [ # the html page that gets rendered in Django
+TEMPLATES = [  # the html page that gets rendered in Django
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, "templates")],     # In order to be OS independent
@@ -101,7 +98,6 @@ TEMPLATES = [ # the html page that gets rendered in Django
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                #'social_django.social_processors.backends',
             ],
         },
     },
@@ -187,14 +183,14 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 # All Auth
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-SITE_ID = 2
+SITE_ID = 1
 
 # SMTP Server for sending password reset emails
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # Only good for local development - need to configure a
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Only good for local development - need to configure a
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 # Additional backend settings for auth -- OAuth2 so django rest?
-AUTHENICATION_BACKENDS = [
+AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
     'django.contrib.auth.backends.ModelBackend',
@@ -204,5 +200,27 @@ SOCIAL_AUTH_FACEBOOK_KEY = "1506824033451537"
 SOCIAL_AUTH_FACEBOOK_SECRET = "e0a58b1074b2237e90a152a1f4c156d0"
 
 # All auth
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Required for
+SOCIALACCOUNT_PROVIDERS = {'google': {}, 'twitter': {},
+                           'facebook':
+                                {'METHOD': 'oauth2',
+                                 'SCOPE': ['email', 'public_profile', 'user_friends'],
+                                 'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+                                 'FIELDS': [
+                                     'id',
+                                     'email',
+                                     'name',
+                                     'first_name',
+                                     'last_name',
+                                     'verified',
+                                     'locale',
+                                     'timezone',
+                                     'link',
+                                     'gender',
+                                     'updated_time'],
+                                 'EXCHANGE_TOKEN': True,
+                                 'LOCALE_FUNC': lambda request: 'kr_KR',
+                                 'VERIFIED_EMAIL': False,
+                                 'VERSION': 'v2.4'}}
