@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import TemplateView # Create a view with just HTML
 
-from pages.views import homepage_view
+from pages.views import homepage_view  # Unused view
 from pages.views import about_view
 from pages.views import hello_world_view
 

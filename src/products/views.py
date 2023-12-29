@@ -101,4 +101,4 @@ def product_create_view_raw_html(request):
 #     }
 #     return render(request, "products/product_create.html", context)
 
-    return render(request, "products/product_detail.html", context)
+#    return render(request, "products/product_detail.html", context)

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # END OF DEFAULT DJANGO APPS
 
     # Facebook authentication / All Auth required apps
+    #  https://docs.allauth.org/en/latest/installation/quickstart.html for list of all possible providers
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -189,11 +190,12 @@ SITE_ID = 1
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # Only good for local development - need to configure a
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
-# Additional backend settings for auth -- OAuth2 so django rest?
+# `allauth` specific authentication methods, such as login by email
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',  # Needed to login by username in Django admin, regardless of 'allauth'
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 SOCIAL_AUTH_FACEBOOK_KEY = "1506824033451537"
@@ -202,7 +204,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = "e0a58b1074b2237e90a152a1f4c156d0"
 # All auth
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Required for
+# Required for All Auth
 SOCIALACCOUNT_PROVIDERS = {'google': {}, 'twitter': {},
                            'facebook':
                                 {'METHOD': 'oauth2',
@@ -224,3 +226,6 @@ SOCIALACCOUNT_PROVIDERS = {'google': {}, 'twitter': {},
                                  'LOCALE_FUNC': lambda request: 'kr_KR',
                                  'VERIFIED_EMAIL': False,
                                  'VERSION': 'v2.4'}}
+
+SECURE_SSL_REDIRECT = True  # Redirect HTTP requests to HTTPS
+SESSION_COOKIE_SECURE = True  # Use secure cookies over HTTPS
