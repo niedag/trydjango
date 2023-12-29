@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import os
+import os, ssl
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # END OF DEFAULT DJANGO APPS
+    'django_extensions',  # Required to run ssl server
 
     # Facebook authentication / All Auth required apps
     #  https://docs.allauth.org/en/latest/installation/quickstart.html for list of all possible providers
@@ -64,7 +65,7 @@ INSTALLED_APPS = [
 
     'vue_app.apps.VueAppConfig',  #
     # create an app using python manage.py startapp [name]
-    # then add it to this installed_apps sectiongit !
+    # then add it to this installed_apps section it !
 ]
 
 MIDDLEWARE = [
@@ -227,5 +228,13 @@ SOCIALACCOUNT_PROVIDERS = {'google': {}, 'twitter': {},
                                  'VERIFIED_EMAIL': False,
                                  'VERSION': 'v2.4'}}
 
-SECURE_SSL_REDIRECT = True  # Redirect HTTP requests to HTTPS
-SESSION_COOKIE_SECURE = True  # Use secure cookies over HTTPS
+SECURE_SSL_REDIRECT = False  # Redirect HTTP requests to HTTPS
+SESSION_COOKIE_SECURE = False  # Use secure cookies over HTTPS
+
+# To locate certificate and key files if you don't want to specify it in the command
+SECURE_SSL_CERT = 'C:/Users/ed/cert.pem'
+SECURE_SSL_KEY = 'C:/Users/ed/key.pem'
+
+# Required for SSL context loaded in Django uses the correct method and correct certificate and key
+ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+ssl_context.load_cert_chain(SECURE_SSL_CERT, keyfile=SECURE_SSL_KEY)
