@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     # Facebook authentication / All Auth required apps
     #  https://docs.allauth.org/en/latest/installation/quickstart.html for list of all possible providers
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -228,8 +228,8 @@ SOCIALACCOUNT_PROVIDERS = {'google': {}, 'twitter': {},
                                  'VERIFIED_EMAIL': False,
                                  'VERSION': 'v2.4'}}
 
-SECURE_SSL_REDIRECT = False  # Redirect HTTP requests to HTTPS
-SESSION_COOKIE_SECURE = False  # Use secure cookies over HTTPS
+SECURE_SSL_REDIRECT = True  # Redirect HTTP requests to HTTPS
+SESSION_COOKIE_SECURE = True  # Use secure cookies over HTTPS
 
 # To locate certificate and key files if you don't want to specify it in the command
 SECURE_SSL_CERT = 'C:/Users/ed/cert.pem'
