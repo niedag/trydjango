@@ -9,3 +9,8 @@ Learning the Django Web Framework (4.2.6)
 - Django templating basics
 - Class/Function based views
 - In-App URLs and Namespacing
+
+Only function that works properly is the Facebook login authentication.
+Requires a local https server - can use ngrok in order to host a temporary server but there are still problems with  csrf tokens and callback urls.
+
+The best Facebook integration uses the request python library. Other python facebook apis are mostly deprecated. 
