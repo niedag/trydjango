@@ -16,4 +16,4 @@ Requires a local https server - can use ngrok in order to host a temporary serve
 The best Facebook integration uses the request python library. Other python facebook apis are mostly deprecated. 
 New django sandbox is the django-okta-skyflow-integration project
 
-See DOSSI-demo (now private) for Stripe, Skyflow, Okta integrations
+See DOSSI-demo (now private) for Stripe, Skyflow, Okta integrations.
