@@ -1,7 +1,7 @@
 Learning the Django Web Framework (4.2.6)
 - Facebook Pages API integration
 - Facebook login authentication
-- Twitter Login and API calling\
+- Twitter Login and API calling
 - Twitter posts scraping
 - Requests and remote data retrieval
 - (Dynamic) URL routing, local SQlite3 database storage and retrieval
