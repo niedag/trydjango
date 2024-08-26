@@ -17,5 +17,3 @@ The best Facebook integration uses the request python library. Other python face
 New django sandbox is the django-okta-skyflow-integration project
 
 See DOSSI-demo (now private) for Django Okta Stripe, Skyflow integrations.
-
-.
